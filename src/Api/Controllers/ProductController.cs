@@ -1,4 +1,5 @@
 ﻿using Application.Services.Producto;
+using Application.Services.Producto.Models.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,14 @@ namespace Api.Controllers
             var result = await _productService.GetAllProduct.Execute();
             return Ok(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateProductRequest request)
+        {
+            var result = await _productService.CreateProduct.Execute(request);
+            return Ok(result);
+        }
+
         
     }
 }
