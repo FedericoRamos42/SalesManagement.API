@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Result
 {
-    public class Result<T>
+    public class Result<T> where T : class
     {
         public T? Value { get; set; }
         public bool IsSucces {  get; set; }

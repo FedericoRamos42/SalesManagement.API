@@ -14,6 +14,13 @@ namespace Domain.Enitites
         public int Stock { get; set; } = default!;
         public Category Category { get; set; } = default!;
         public int CategoryId { get; set; } = default!;
+
+        public decimal GetActualPrice()
+        {
+            return (Prices
+                    .OrderByDescending(p => p.CreatedAt)
+                    .FirstOrDefault()?.UnitPrice ?? 0);
+        }
         public ICollection<ProductPrice> Prices { get; set; } = new List<ProductPrice>();
     }
 }
