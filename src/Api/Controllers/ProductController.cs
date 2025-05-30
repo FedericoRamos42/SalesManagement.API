@@ -34,6 +34,12 @@ namespace Api.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _productService.DeleteProduct.Execute(id);
+            return Ok(result);
+        }
         
     }
 }

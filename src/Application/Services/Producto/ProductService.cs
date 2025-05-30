@@ -11,6 +11,7 @@ namespace Application.Services.Producto
         CreateProduct CreateProduct,
         UpdateProduct UpdateProducy,
         GetAllProduct GetAllProduct,
-        GetProduct GetProduct
+        GetProduct GetProduct,
+        DeleteProduct DeleteProduct
     );
 }
