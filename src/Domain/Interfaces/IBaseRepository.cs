@@ -11,9 +11,9 @@ namespace Domain.Interfaces
     {
         Task<T>GetById(int id);
         Task<IEnumerable<T>> GetAll();
-        Task<T> Create(T entity);
-        Task<T> Update(T entity);
-        Task<T> Delete(T entity);
+        Task Create(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
         Task<IEnumerable<T>> Search(Expression<Func<T, bool>> predicate);   
 
     }
