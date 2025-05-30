@@ -19,6 +19,12 @@ namespace Api.Controllers
             var result = await _productService.GetProduct.Execute(id);
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _productService.GetAllProduct.Execute();
+            return Ok(result);
+        }
         
     }
 }
