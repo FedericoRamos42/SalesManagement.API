@@ -1,4 +1,6 @@
+using Domain.Interfaces;
 using Infrastructure.Context;
+using Infrastructure.Repositories
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddSwaggerGen();
 #region SqlLite connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
