@@ -1,4 +1,5 @@
 ﻿using Application.Services.Categories;
+using Application.Services.Categories.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,6 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> GetAll()
         {
             var result = await _categoryService.GetAll.Execute();
@@ -23,6 +23,13 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> Create(CategoryDto request)
+        {
+            var result = await _categoryService.CreateCategory.Execute(request);
+            return Ok(result);
+        }
+
+
 
 
 
