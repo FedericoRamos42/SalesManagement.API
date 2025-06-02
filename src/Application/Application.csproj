@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Producto\Validators\" />
+    <Folder Include="Services\Products\Validators\" />
   </ItemGroup>
 
 </Project>

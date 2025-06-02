@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Category.Models
+namespace Application.Services.Categories.Models
 {
     public class CategoryDto
     {
