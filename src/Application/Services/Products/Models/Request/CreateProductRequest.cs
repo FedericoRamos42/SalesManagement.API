@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Producto.Models.Request
+namespace Application.Services.Products.Models.Request
 {
     public class CreateProductRequest
     {

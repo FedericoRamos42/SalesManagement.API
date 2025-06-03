@@ -1,6 +1,6 @@
 ﻿using Application.Result;
 using Application.Services.Producto.Mappers;
-using Application.Services.Producto.Models;
+using Application.Services.Products.Models;
 using Domain.Interfaces;
 
 namespace Application.Services.Producto.Features

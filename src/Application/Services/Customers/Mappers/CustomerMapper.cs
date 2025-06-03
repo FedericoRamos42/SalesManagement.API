@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Customers.Models;
-using Application.Services.Producto.Models;
 using Domain.Enitites;
 
 namespace Application.Services.Customers.Mappers

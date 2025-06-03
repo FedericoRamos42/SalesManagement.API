@@ -1,5 +1,5 @@
 ﻿using Application.Services.Producto;
-using Application.Services.Producto.Models.Request;
+using Application.Services.Products.Models.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

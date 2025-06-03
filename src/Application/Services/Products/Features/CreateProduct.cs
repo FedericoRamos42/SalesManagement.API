@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Result;
 using Application.Services.Producto.Mappers;
-using Application.Services.Producto.Models;
-using Application.Services.Producto.Models.Request;
+using Application.Services.Products.Models;
+using Application.Services.Products.Models.Request;
 using Domain.Enitites;
 using Domain.Interfaces;
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Enitites;
 
-namespace Application.Services.Producto.Models
+namespace Application.Services.Products.Models
 {
     public class ProductDto
     {
