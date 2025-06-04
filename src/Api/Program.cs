@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 ProductContainerDI.Register(builder.Services);
 CategoryContainerDI.Register(builder.Services);
+CustomerContainerDI.Register(builder.Services);
 
 builder.Services.AddSwaggerGen();
 #region SqlLite connection

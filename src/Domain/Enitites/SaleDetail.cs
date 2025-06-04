@@ -14,6 +14,7 @@ namespace Domain.Enitites
         public int SaleId { get; set; }
         public Sale Sale { get; set; } = default!;
         public int Quantity { get; set; }
-        public decimal Total { get; set; }
+        public decimal Total { get; set; } 
+
     }
 }

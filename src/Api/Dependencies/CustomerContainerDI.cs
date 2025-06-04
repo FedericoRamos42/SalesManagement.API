@@ -1,5 +1,7 @@
 ﻿using Application.Services.Categories;
 using Application.Services.Categories.Features;
+using Application.Services.Customers;
+using Application.Services.Customers.Features;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
 
@@ -9,7 +11,13 @@ namespace Api.Dependencies
     {
         public static void Register(IServiceCollection services)
         {
-            
+            services.AddScoped<CreateCustomer>();
+            services.AddScoped<UpdateCustomer>();
+            services.AddScoped<DeleteCustomer>();
+            services.AddScoped<SearchCustomer>();
+            services.AddScoped<GetAllCustomer>();
+            services.AddScoped<CustomerService>();
+            services.AddScoped<ICustomerRepository,CustomerRepository>();
         }
     }
 }

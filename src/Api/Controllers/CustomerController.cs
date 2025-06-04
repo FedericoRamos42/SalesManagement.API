@@ -52,9 +52,5 @@ namespace Api.Controllers
             return Ok(result);
         }
 
-
-
-
-
     }
 }
