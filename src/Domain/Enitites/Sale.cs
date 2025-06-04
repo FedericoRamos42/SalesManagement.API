@@ -15,5 +15,11 @@ namespace Domain.Enitites
         public Customer Customer { get; set; } = default!;
         public decimal TotalAmount { get; set; }
         public ICollection<SaleDetail> Items { get; set; } = new List<SaleDetail>();
+
+
+        public decimal CalculateTotal()
+        {
+            return TotalAmount = Items.Sum(d => d.Total);
+        }
     }
 }

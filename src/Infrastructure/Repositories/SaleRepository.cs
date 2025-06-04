@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.Enitites;
 using Domain.Interfaces;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -16,7 +17,13 @@ namespace Infrastructure.Repositories
         {
             _context = context;
         }
-        
-          
+
+        public async Task<List<Sale>> GetAllSales()
+        {
+            var sales = await _context.Sales.Include(s => s.Customer)
+                                            .Include(s => s.Items)
+                                            .ThenInclude(i => i.Product).ToListAsync();
+            return sales;
+        }
     }
 }

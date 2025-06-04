@@ -26,7 +26,8 @@ namespace Infrastructure.Configurations
 
             builder.Property(p => p.Quantity)
                    .IsRequired();
-
+            builder.Property(p => p.UnitPrice)
+                    .IsRequired();
             builder.HasOne(p => p.Product)
                    .WithMany()
                    .HasForeignKey(d=>d.ProductId);

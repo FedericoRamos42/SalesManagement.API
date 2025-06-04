@@ -9,5 +9,6 @@ namespace Domain.Interfaces
 {
     public interface ISaleRepository : IBaseRepository<Sale>
     {
+        Task<List<Sale>> GetAllSales(); 
     }
 }

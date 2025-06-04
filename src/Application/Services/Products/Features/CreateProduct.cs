@@ -32,6 +32,7 @@ namespace Application.Services.Producto.Features
                 Name = request.Name,
                 Description = request.Description,
                 CategoryId = request.CategoryId,
+                Stock = request.Stock,
                 Prices = prices,
             };
 

@@ -12,7 +12,7 @@ namespace Application.Services.Products.Models
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public int Stock { get; set; } = default!;
-        public string CategoryName { get; set; } = default!;
+        public int CategoryId { get; set; }
         public decimal Price { get; set; }
     }
 }

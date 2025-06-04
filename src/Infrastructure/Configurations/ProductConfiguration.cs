@@ -31,6 +31,8 @@ namespace Infrastructure.Configurations
             builder.Property(p => p.CategoryId)
                     .IsRequired();
 
+            
+
             builder.HasOne(p => p.Category)
                 .WithMany(p => p.Products)
                 .HasForeignKey(p=>p.CategoryId);    
