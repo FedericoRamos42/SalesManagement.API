@@ -9,12 +9,11 @@ namespace Domain.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<T>GetById(int id);
-        Task<IEnumerable<T>> GetAll();
+        Task<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
-        Task<IEnumerable<T>> Search(Expression<Func<T, bool>> predicate);   
+        Task<IEnumerable<T>> Search(Expression<Func<T,bool>>? filter = null, params Expression<Func<T, object>>[] includes);
 
     }
 }

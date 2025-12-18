@@ -11,8 +11,8 @@ namespace Api.Controllers
     public class CustomerController : ControllerBase
     {
 
-        private readonly CustomerService _customerService;
-        public CustomerController(CustomerService customerService)
+        private readonly CustomerUseCases _customerService;
+        public CustomerController(CustomerUseCases customerService)
         {
             _customerService = customerService;
         }

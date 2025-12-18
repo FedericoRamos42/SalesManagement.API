@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Categories
 {
-    public record CategoryService(
+    public record CategoryUseCases(
         GetAllCategories GetAll,
         CreateCategories CreateCategory
         );

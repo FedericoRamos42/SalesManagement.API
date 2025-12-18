@@ -21,7 +21,7 @@ namespace Application.Services.Customers.Features
 
         public async Task<Result<CustomerDto>> Execute(int id)
         {
-            var customer = await _customerRepository.GetById(id);
+            var customer = await _customerRepository.Get(p => p.Id == id);
 
             await _customerRepository.Delete(customer);
             var dto = customer.ToDto();

@@ -7,8 +7,8 @@ using Application.Services.Sales.Features;
 
 namespace Application.Services.Sales
 {
-    public record SaleService(
+    public record SaleUseCases(
         CreateSale CreateSale,
         GetAllSales GetAllSale
-        );
+       );
 }

@@ -22,7 +22,7 @@ namespace Application.Services.Customers.Features
 
         public async Task<Result<IEnumerable<CustomerDto>>> Execute()
         {
-            var customers = (List<Customer>)await _customerRepository.GetAll();
+            var customers = (List<Customer>)await _customerRepository.Search();
 
             var dto = customers.ToListDto();
             return Result<IEnumerable<CustomerDto>>.Succes(dto);

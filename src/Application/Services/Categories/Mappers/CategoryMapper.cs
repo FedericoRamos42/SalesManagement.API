@@ -14,6 +14,7 @@ namespace Application.Services.Categories.Mappers
         {
             return new CategoryDto()
             {
+                Id = category.Id,
                 Name = category.Name,
             };
         }

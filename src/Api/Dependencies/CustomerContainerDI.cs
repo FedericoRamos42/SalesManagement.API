@@ -16,7 +16,7 @@ namespace Api.Dependencies
             services.AddScoped<DeleteCustomer>();
             services.AddScoped<SearchCustomer>();
             services.AddScoped<GetAllCustomer>();
-            services.AddScoped<CustomerService>();
+            services.AddScoped<CustomerUseCases>();
             services.AddScoped<ICustomerRepository,CustomerRepository>();
         }
     }

@@ -9,8 +9,8 @@ namespace Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
-        public ProductController(ProductService productService)
+        private readonly ProductUseCases _productService;
+        public ProductController(ProductUseCases productService)
         {
             _productService = productService;
         }

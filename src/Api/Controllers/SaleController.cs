@@ -11,9 +11,9 @@ namespace Api.Controllers
     [ApiController]
     public class SaleController : ControllerBase
     {
-        private readonly SaleService _services;
+        private readonly SaleUseCases _services;
 
-        public SaleController(SaleService services)
+        public SaleController(SaleUseCases services)
         {
             _services = services;
         }
@@ -28,7 +28,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSaleRequest request)
         {
-            var result = _services.CreateSale.Execute(request);
+            var result = await _services.CreateSale.Execute(request);
             return Ok(result);
         }
 

@@ -22,7 +22,7 @@ namespace Application.Services.Customers.Features
 
         public async Task<Result<CustomerDto>> Execute(int id,CustomerForRequest request)
         {
-            var customer = await _customerRepository.GetById(id);
+            var customer = await _customerRepository.Get(p => p.Id == id);
             
             customer.PhoneNumber = request.PhoneNumber;
             customer.Name = request.Name;

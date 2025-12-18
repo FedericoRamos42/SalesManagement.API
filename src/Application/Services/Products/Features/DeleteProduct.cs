@@ -16,7 +16,7 @@ namespace Application.Services.Producto.Features
 
         public async Task<Result<ProductDto>> Execute(int id) 
         {
-            var product = await _repository.GetById(id);
+            var product = await _repository.Get(p => p.Id == id, p=> p.Category);
             await _repository.Delete(product);
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);

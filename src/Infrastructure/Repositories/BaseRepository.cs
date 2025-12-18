@@ -29,20 +29,31 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
-            return await _context.Set<T>().ToListAsync();
+            IQueryable<T> result = _context.Set<T>();
+
+            foreach (var include in includes)
+                result = result.Include(include);
+
+            return await result.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<IEnumerable<T>> Search(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)
         {
-            return await _context.Set<T>().FindAsync(id);
+            IQueryable<T> result = _context.Set<T>();
+
+            if (filter != null) 
+                result = result.Where(filter);
+
+            foreach(var include in includes)
+                result = result.Include(include);
+
+            return await result.ToListAsync();
+
+
         }
 
-        public async Task<IEnumerable<T>> Search(Expression<Func<T, bool>> predicate)
-        {
-            return await _context.Set<T>().Where(predicate).ToListAsync();
-        }
 
         public async Task Update(T entity)
         {

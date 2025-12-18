@@ -30,7 +30,7 @@ namespace Application.Services.Sales.Features
 
             foreach (var detail in request.Details) 
             {
-                Product product = await _productRepository.GetById(detail.ProductId);
+                Product product = await _productRepository.Get(p=> p.Id == detail.ProductId);
                 var item = new SaleDetail()
                 {
                     ProductId = detail.ProductId,

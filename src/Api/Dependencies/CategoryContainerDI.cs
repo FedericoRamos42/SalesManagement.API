@@ -11,7 +11,7 @@ namespace Api.Dependencies
         {
             services.AddScoped<CreateCategories>();
             services.AddScoped<GetAllCategories>();
-            services.AddScoped<CategoryService>();
+            services.AddScoped<CategoryUseCases>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }

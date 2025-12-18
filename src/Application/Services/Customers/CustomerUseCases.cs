@@ -7,7 +7,7 @@ using Application.Services.Customers.Features;
 
 namespace Application.Services.Customers
 {
-    public record CustomerService(
+    public record CustomerUseCases(
         CreateCustomer CreateCustomer,
         UpdateCustomer UpdateCustomer,
         GetAllCustomer GetAll,

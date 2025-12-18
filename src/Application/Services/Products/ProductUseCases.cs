@@ -7,7 +7,7 @@ using Application.Services.Producto.Features;
 
 namespace Application.Services.Producto
 {
-    public record ProductService(
+    public record ProductUseCases(
         CreateProduct CreateProduct,
         UpdateProduct UpdateProducy,
         GetAllProduct GetAllProduct,

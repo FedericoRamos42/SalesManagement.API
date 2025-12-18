@@ -23,7 +23,7 @@ namespace Application.Services.Categories.Features
 
         public async Task<Result<List<CategoryDto>>> Execute()
         {
-            List<Category> categories = (List<Category>) await _categoryRepository.GetAll();
+            List<Category> categories = (List<Category>) await _categoryRepository.Search();
             var dto = categories.ToListDto();
             return Result <List<CategoryDto>>.Succes(dto);
         }

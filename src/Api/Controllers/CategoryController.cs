@@ -9,8 +9,8 @@ namespace Api.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryService _categoryService;
-        public CategoryController(CategoryService categoryService)
+        private readonly CategoryUseCases _categoryService;
+        public CategoryController(CategoryUseCases categoryService)
         {
             _categoryService = categoryService;
         }
