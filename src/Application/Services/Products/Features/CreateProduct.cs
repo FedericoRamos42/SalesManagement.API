@@ -14,9 +14,9 @@ namespace Application.Services.Producto.Features
 {
     public class CreateProduct
     {
-        private readonly IProductRepository _repository;
+        private readonly IUnitOfWork _repository;
 
-        public CreateProduct(IProductRepository repository)
+        public CreateProduct(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -36,7 +36,9 @@ namespace Application.Services.Producto.Features
                 Prices = prices,
             };
 
-            await _repository.Create(product);
+            await _repository.Products.Create(product);
+            await _repository.SaveChangesAsync();
+
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);
 

@@ -14,15 +14,14 @@ namespace Application.Services.Customers.Features
     public class GetAllCustomer
     {
 
-        private readonly ICustomerRepository _customerRepository;
-        public GetAllCustomer(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _repository;
+        public GetAllCustomer(IUnitOfWork repository)
         {
-            _customerRepository = customerRepository;
+            _repository = repository;
         }
-
         public async Task<Result<IEnumerable<CustomerDto>>> Execute()
         {
-            var customers = (List<Customer>)await _customerRepository.Search();
+            var customers = (List<Customer>)await _repository.Customers.Search();
 
             var dto = customers.ToListDto();
             return Result<IEnumerable<CustomerDto>>.Succes(dto);

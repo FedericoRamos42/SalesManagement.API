@@ -16,7 +16,7 @@ namespace Application.Services.Sales.Mappers
             return new SaleDto
             {
                 Id = sale.Id,
-                CustomerName = sale.Customer.Name,
+                CustomerId = sale.CustomerId,
                 PaymenthMethod = sale.PaymenthMethod.ToString(),
                 Items = sale.Items.Select(x => x.ToDto()).ToList(),
                 TotalAmount = sale.TotalAmount,

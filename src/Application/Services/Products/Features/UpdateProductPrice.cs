@@ -13,16 +13,16 @@ namespace Application.Services.Products.Features
 {
     public class UpdateProductPrice
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _repository;
 
-        public UpdateProductPrice(IProductRepository productRepository)
+        public UpdateProductPrice(IUnitOfWork repository)
         {
-            _productRepository = productRepository;
+            _repository = repository;
         }
 
         public async Task<Result<ProductDto>> Execute(int id, decimal price) 
         {
-            var product = await _productRepository.Get(p=>p.Id == id, p=>p.Category);
+            var product = await _repository.Products.Get(p=>p.Id == id, p=>p.Category);
 
             var newPrice = new ProductPrice()
             {
@@ -31,7 +31,8 @@ namespace Application.Services.Products.Features
             };
             product.Prices.Add(newPrice);
 
-            await _productRepository.Update(product);
+            await _repository.Products.Update(product);
+            await _repository.SaveChangesAsync();
 
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);

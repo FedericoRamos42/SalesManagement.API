@@ -23,9 +23,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryDto request)
+        public async Task<IActionResult> Create([FromBody] string name)
         {
-            var result = await _categoryService.CreateCategory.Execute(request);
+            var result = await _categoryService.CreateCategory.Execute(name);
             return Ok(result);
         }
 

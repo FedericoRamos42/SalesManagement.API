@@ -14,16 +14,16 @@ namespace Application.Services.Categories.Features
 {
     public class GetAllCategories
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _repository;
 
-        public GetAllCategories(ICategoryRepository categoryRepository)
+        public GetAllCategories(IUnitOfWork repository)
         {
-            _categoryRepository = categoryRepository;
+            _repository = repository;
         }
 
         public async Task<Result<List<CategoryDto>>> Execute()
         {
-            List<Category> categories = (List<Category>) await _categoryRepository.Search();
+            List<Category> categories = (List<Category>) await _repository.Categories.Search();
             var dto = categories.ToListDto();
             return Result <List<CategoryDto>>.Succes(dto);
         }

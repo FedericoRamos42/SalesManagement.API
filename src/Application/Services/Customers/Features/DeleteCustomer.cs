@@ -13,17 +13,19 @@ namespace Application.Services.Customers.Features
 {
     public class DeleteCustomer
     {
-        private readonly ICustomerRepository _customerRepository;
-        public DeleteCustomer(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _repository;
+        public DeleteCustomer(IUnitOfWork repository)
         {
-            _customerRepository = customerRepository;
+            _repository = repository;
         }
 
         public async Task<Result<CustomerDto>> Execute(int id)
         {
-            var customer = await _customerRepository.Get(p => p.Id == id);
+            var customer = await _repository.Customers.Get(p => p.Id == id);
 
-            await _customerRepository.Delete(customer);
+            await _repository.Customers.Delete(customer);
+            await _repository.SaveChangesAsync();
+
             var dto = customer.ToDto();
             return Result<CustomerDto>.Succes(dto);
         }

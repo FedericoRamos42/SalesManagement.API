@@ -13,23 +13,23 @@ namespace Application.Services.Customers.Features
 {
     public class UpdateCustomer
     {
-        private readonly ICustomerRepository _customerRepository;
-
-        public UpdateCustomer(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _repository;
+        public UpdateCustomer(IUnitOfWork repository)
         {
-            _customerRepository = customerRepository;
+            _repository = repository;
         }
 
         public async Task<Result<CustomerDto>> Execute(int id,CustomerForRequest request)
         {
-            var customer = await _customerRepository.Get(p => p.Id == id);
+            var customer = await _repository.Customers.Get(p => p.Id == id);
             
             customer.PhoneNumber = request.PhoneNumber;
             customer.Name = request.Name;
             customer.Email = request.Email;
             customer.Address = request.Address;
 
-            await _customerRepository.Update(customer);
+            await _repository.Customers.Update(customer);
+            await _repository.SaveChangesAsync();
 
             var dto = customer.ToDto();
             return Result<CustomerDto>.Succes(dto);

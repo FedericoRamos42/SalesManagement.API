@@ -14,11 +14,11 @@ namespace Application.Services.Customers.Features
 {
     public class CreateCustomer
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IUnitOfWork _repository;
 
-        public CreateCustomer(ICustomerRepository customerRepository)
+        public CreateCustomer(IUnitOfWork repository)
         {
-            _customerRepository = customerRepository;
+            _repository = repository;
         }
 
         public async Task<Result<CustomerDto>> Execute(CustomerForRequest request)
@@ -31,7 +31,8 @@ namespace Application.Services.Customers.Features
                 Address = request.Address,
             };
 
-            await _customerRepository.Create(customer);
+            await _repository.Customers.Create(customer);
+            await _repository.SaveChangesAsync();
             var dto = customer.ToDto();
             return Result<CustomerDto>.Succes(dto);
         }

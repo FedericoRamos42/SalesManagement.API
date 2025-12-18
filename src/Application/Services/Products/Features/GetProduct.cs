@@ -13,16 +13,16 @@ namespace Application.Services.Producto.Features
 {
     public class GetProduct
     {
-        private readonly IProductRepository _repository;
+        private readonly IUnitOfWork _repository;
 
-        public GetProduct(IProductRepository repository)
+        public GetProduct(IUnitOfWork repository)
         {
             _repository = repository;
         }
 
         public async Task<Result<ProductDto>> Execute(int id)
         {
-            var product = await _repository.Get(p => p.Id == id,p=> p.Category);
+            var product = await _repository.Products.Get(p => p.Id == id,p=> p.Category);
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);
         }

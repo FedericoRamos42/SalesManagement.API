@@ -14,20 +14,21 @@ namespace Application.Services.Categories.Features
     public class CreateCategories
     {
 
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _repository;
 
-        public CreateCategories(ICategoryRepository categoryRepository)
+        public CreateCategories(IUnitOfWork repository)
         {
-            _categoryRepository = categoryRepository;
+            _repository = repository;
         }
-        public async Task<Result<CategoryDto>> Execute(CategoryDto category) 
+        public async Task<Result<CategoryDto>> Execute(string name) 
         {
             Category entity = new Category()
             {
-                Name = category.Name,
+                Name = name,
             };
 
-            await _categoryRepository.Create(entity);
+            await _repository.Categories.Create(entity);
+            await _repository.SaveChangesAsync();
 
             var dto = entity.ToDto();            
             return Result<CategoryDto>.Succes(dto);

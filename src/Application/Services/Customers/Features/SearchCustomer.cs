@@ -13,15 +13,15 @@ namespace Application.Services.Customers.Features
 {
     public class SearchCustomer
     {
-        private readonly ICustomerRepository _customerRepository;
-        public SearchCustomer(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _repository;
+        public SearchCustomer(IUnitOfWork repository)
         {
-            _customerRepository = customerRepository;
+            _repository = repository;
         }
 
         public async Task<Result<IEnumerable<CustomerDto>>> Execute(string name)
         {
-            var customers = (List<Customer>) await _customerRepository.Search(c=>c.Name == name);
+            var customers = (List<Customer>) await _repository.Customers.Search(c=>c.Name == name);
             var dto = customers.ToListDto();
             return Result<IEnumerable<CustomerDto>>.Succes(dto);
         }

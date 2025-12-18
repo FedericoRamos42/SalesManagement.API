@@ -15,22 +15,20 @@ namespace Application.Services.Sales.Features
 {
     public class CreateSale
     {
-        private readonly ISaleRepository _saleRepository;
-        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _repository;
 
-        public CreateSale( ISaleRepository saleRepository,IProductRepository productRepository)
+        public CreateSale(IUnitOfWork repository)
         {
-            _saleRepository = saleRepository;
-            _productRepository = productRepository;
+            _repository = repository;
         }
 
         public async Task<Result<SaleDto>> Execute(CreateSaleRequest request)
         {
-            List<SaleDetail> details = new List<SaleDetail>();
+            var details = new List<SaleDetail>();
 
             foreach (var detail in request.Details) 
             {
-                Product product = await _productRepository.Get(p=> p.Id == detail.ProductId);
+                Product product = await _repository.Products.Get(p=> p.Id == detail.ProductId, p=> p.Prices);
                 var item = new SaleDetail()
                 {
                     ProductId = detail.ProductId,
@@ -39,6 +37,8 @@ namespace Application.Services.Sales.Features
                 };
                 item.CalculateTotal();
                 details.Add(item);
+
+                product.Stock -= detail.Quantity;
             }
 
             Sale sale = new Sale()
@@ -49,7 +49,8 @@ namespace Application.Services.Sales.Features
             };
             sale.CalculateTotal();
 
-            await _saleRepository.Create(sale);
+            await _repository.Sales.Create(sale);
+            await _repository.SaveChangesAsync();
 
             var dto = sale.ToDto();
 

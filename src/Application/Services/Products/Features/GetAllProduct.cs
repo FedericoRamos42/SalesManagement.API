@@ -13,16 +13,16 @@ namespace Application.Services.Producto.Features
 {
     public class GetAllProduct
     {
-        private readonly IProductRepository _repository;
+        private readonly IUnitOfWork _repository;
 
-        public GetAllProduct(IProductRepository repository)
+        public GetAllProduct(IUnitOfWork repository)
         {
             _repository = repository;
         }
 
         public async Task<Result<List<ProductDto>>> Execute()
         {
-            List<Product> products = (List<Product>) await _repository.Search(null, p => p.Category, p => p.Prices);
+            List<Product> products = (List<Product>) await _repository.Products.Search(null, p => p.Category, p => p.Prices);
             var dto = products.ToListDto();
             return Result<List<ProductDto>>.Succes(dto);
         }
