@@ -22,7 +22,7 @@ namespace Application.Services.Producto.Features
 
         public async Task<Result<List<ProductDto>>> Execute()
         {
-            List<Product> products = (List<Product>) await _repository.GetAll();
+            List<Product> products = await _repository.GetAllWithCategory();
             var dto = products.ToListDto();
             return Result<List<ProductDto>>.Succes(dto);
         }

@@ -22,7 +22,7 @@ namespace Application.Services.Producto.Features
 
         public async Task<Result<ProductDto>> Execute(int id)
         {
-            var product = await _repository.GetById(id);
+            var product = await _repository.GetWithCategory(id);
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);
         }

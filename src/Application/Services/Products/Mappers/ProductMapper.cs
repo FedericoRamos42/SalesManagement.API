@@ -19,7 +19,7 @@ namespace Application.Services.Producto.Mappers
                 Description = product.Description,
                 Stock = product.Stock,
                 Price = product.GetActualPrice(),
-                CategoryId = product.CategoryId,
+                Category = product.Category.Name,
 
             };
         }

@@ -9,6 +9,8 @@ namespace Domain.Interfaces
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        
+        Task<Product> GetWithCategory (int Id);
+        Task<List<Product>> GetAllWithCategory();
+
     }
 }

@@ -15,7 +15,9 @@ namespace Infrastructure.Repositories
         public CategoryRepository(ApplicationDbContext context) : base(context) 
         {
             _context = context;
-        }  
+        }
+        
+
             
     }
 }
