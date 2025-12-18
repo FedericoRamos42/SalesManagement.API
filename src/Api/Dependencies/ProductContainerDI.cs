@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Producto;
 using Application.Services.Producto.Features;
+using Application.Services.Products.Features;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ namespace Api.Dependencies
             services.AddScoped<GetAllProduct>();
             services.AddScoped<ProductUseCases>();
             services.AddScoped<GetProduct>();
+            services.AddScoped<UpdateProductPrice>();
             services.AddScoped<IProductRepository, ProductRepository>(); 
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Services.Producto.Features;
+using Application.Services.Products.Features;
 
 namespace Application.Services.Producto
 {
@@ -12,6 +13,7 @@ namespace Application.Services.Producto
         UpdateProductStock UpdateProductStock,
         GetAllProduct GetAllProduct,
         GetProduct GetProduct,
+        UpdateProductPrice UpdateProductPrice,
         DeleteProduct DeleteProduct
     );
 }
