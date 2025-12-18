@@ -15,6 +15,7 @@ namespace Application.Services.Producto.Mappers
         {
             return new ProductDto
             {
+                Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Stock = product.Stock,

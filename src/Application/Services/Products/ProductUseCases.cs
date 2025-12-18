@@ -9,7 +9,7 @@ namespace Application.Services.Producto
 {
     public record ProductUseCases(
         CreateProduct CreateProduct,
-        UpdateProduct UpdateProducy,
+        UpdateProductStock UpdateProductStock,
         GetAllProduct GetAllProduct,
         GetProduct GetProduct,
         DeleteProduct DeleteProduct

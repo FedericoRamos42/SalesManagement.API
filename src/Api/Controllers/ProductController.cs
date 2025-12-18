@@ -34,6 +34,13 @@ namespace Api.Controllers
             return Ok(result);
         }
 
+        [HttpPut ("{id}/stock")]
+        public async Task<IActionResult> UpdateStock(int id, UpdateStockRequest request)
+        {
+            var result = await _productService.UpdateProductStock.Execute(id, request);
+            return Ok(result);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

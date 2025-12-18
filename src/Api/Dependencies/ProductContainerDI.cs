@@ -16,7 +16,7 @@ namespace Api.Dependencies
         public static void Register(IServiceCollection services)
         {
             services.AddScoped<CreateProduct>();
-            services.AddScoped<UpdateProduct>();
+            services.AddScoped<UpdateProductStock>();
             services.AddScoped<DeleteProduct>();
             services.AddScoped<GetAllProduct>();
             services.AddScoped<ProductUseCases>();

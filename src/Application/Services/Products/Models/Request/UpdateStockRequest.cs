@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Producto.Features
+namespace Application.Services.Products.Models.Request
 {
-    public class UpdateProduct
+    public class UpdateStockRequest
     {
+        public int Stock {  get; set; }
     }
 }
