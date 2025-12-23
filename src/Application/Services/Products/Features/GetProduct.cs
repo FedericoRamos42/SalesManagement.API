@@ -23,6 +23,9 @@ namespace Application.Services.Producto.Features
         public async Task<Result<ProductDto>> Execute(int id)
         {
             var product = await _repository.Products.Get(p => p.Id == id,p=> p.Category);
+            if (product is null)
+                return Result<ProductDto>.Failure($"product with id {id} does not exist");
+
             var dto = product.ToDto();
             return Result<ProductDto>.Succes(dto);
         }

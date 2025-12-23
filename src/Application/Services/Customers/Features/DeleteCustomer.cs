@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Result;
+﻿using Application.Result;
 using Application.Services.Customers.Mappers;
 using Application.Services.Customers.Models;
 using Domain.Interfaces;
@@ -22,6 +16,9 @@ namespace Application.Services.Customers.Features
         public async Task<Result<CustomerDto>> Execute(int id)
         {
             var customer = await _repository.Customers.Get(p => p.Id == id);
+
+            if (customer is null)
+                return Result<CustomerDto>.Failure($"customer with id {id} does not exist");
 
             await _repository.Customers.Delete(customer);
             await _repository.SaveChangesAsync();

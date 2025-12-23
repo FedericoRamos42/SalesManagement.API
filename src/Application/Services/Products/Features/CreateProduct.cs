@@ -9,19 +9,27 @@ using Application.Services.Products.Models;
 using Application.Services.Products.Models.Request;
 using Domain.Enitites;
 using Domain.Interfaces;
+using FluentValidation;
 
 namespace Application.Services.Producto.Features
 {
     public class CreateProduct
     {
         private readonly IUnitOfWork _repository;
-
-        public CreateProduct(IUnitOfWork repository)
+        private readonly IValidator<CreateProductRequest> _validator;
+        public CreateProduct(IUnitOfWork repository,IValidator<CreateProductRequest> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
         public async Task<Result<ProductDto>> Execute(CreateProductRequest request) 
         {
+            var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return Result<ProductDto>.Failure(errors);
+            }
             var price = new ProductPrice()
             {
                 UnitPrice = request.Price,

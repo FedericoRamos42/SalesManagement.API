@@ -42,9 +42,9 @@ namespace Api.Controllers
         }
 
         [HttpPut ("{id}/price")]
-        public async Task<IActionResult> UpdateStock(int id, decimal price)
+        public async Task<IActionResult> UpdateStock(int id, [FromBody] UpdatePriceRequest request)
         {
-            var result = await _productService.UpdateProductPrice.Execute(id, price);
+            var result = await _productService.UpdateProductPrice.Execute(id, request);
             return Ok(result);
         }
 

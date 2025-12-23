@@ -4,31 +4,44 @@ using Application.Services.Sales.Models;
 using Application.Services.Sales.Models.Request;
 using Domain.Enitites;
 using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text;
-using System.Threading.Tasks;
+using FluentValidation;
 
 namespace Application.Services.Sales.Features
 {
     public class CreateSale
     {
         private readonly IUnitOfWork _repository;
+        private readonly IValidator<CreateSaleRequest> _validator;
 
-        public CreateSale(IUnitOfWork repository)
+        public CreateSale(IUnitOfWork repository, IValidator<CreateSaleRequest> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
         public async Task<Result<SaleDto>> Execute(CreateSaleRequest request)
         {
+            var validation = await _validator.ValidateAsync(request);
+            if(!validation.IsValid)
+            {
+               var errors =  validation.Errors.Select(e=>e.ErrorMessage).ToList();
+                return Result<SaleDto>.Failure(errors);
+            }
+
             var details = new List<SaleDetail>();
 
             foreach (var detail in request.Details) 
             {
                 Product product = await _repository.Products.Get(p=> p.Id == detail.ProductId, p=> p.Prices);
+
+                if (product is null)
+                    return Result<SaleDto>.Failure($"product with id {detail.ProductId} does not exist");
+
+                if (product.Stock < detail.Quantity)
+                    return Result<SaleDto>.Failure(
+                        $"Insufficient stock for product {product.Name}"
+                    );
+
                 var item = new SaleDetail()
                 {
                     ProductId = detail.ProductId,

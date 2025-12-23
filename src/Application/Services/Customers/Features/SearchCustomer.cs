@@ -21,7 +21,7 @@ namespace Application.Services.Customers.Features
 
         public async Task<Result<IEnumerable<CustomerDto>>> Execute(string name)
         {
-            var customers = (List<Customer>) await _repository.Customers.Search(c=>c.Name == name);
+            var customers = (List<Customer>) await _repository.Customers.Search(c => c.Name == name);
             var dto = customers.ToListDto();
             return Result<IEnumerable<CustomerDto>>.Succes(dto);
         }

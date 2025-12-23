@@ -1,7 +1,9 @@
 using Api.Dependencies;
 using Application.Services.Producto;
+using Application.Services.Products.Validators;
 using Domain.Enitites;
 using Domain.Interfaces;
+using FluentValidation;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
 ProductContainerDI.Register(builder.Services);
 CategoryContainerDI.Register(builder.Services);
 CustomerContainerDI.Register(builder.Services);

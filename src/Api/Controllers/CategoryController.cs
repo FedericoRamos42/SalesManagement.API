@@ -1,5 +1,6 @@
 ﻿using Application.Services.Categories;
 using Application.Services.Categories.Models;
+using Application.Services.Categories.Models.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,9 +24,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] string name)
+        public async Task<IActionResult> Create([FromBody] CreateCategoryForRequest request)
         {
-            var result = await _categoryService.CreateCategory.Execute(name);
+            var result = await _categoryService.CreateCategory.Execute(request);
             return Ok(result);
         }
 
