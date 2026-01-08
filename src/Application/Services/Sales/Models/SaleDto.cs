@@ -12,7 +12,7 @@ namespace Application.Services.Sales.Models
     {
         public int Id { get; set; }
         public string PaymenthMethod { get; set; } = default!;
-        public int CustomerId { get; set; } = default!;
+        public string CustomerName { get; set; } = default!;
         public decimal TotalAmount { get; set; }
         public ICollection<SaleDetailDto> Items { get; set; } = [];
     }

@@ -22,7 +22,7 @@ namespace Application.Services.Sales.Features
 
         public async Task<Result<List<SaleDto>>> Execute()
         {
-            List<Sale> sales = await _saleRepository.GetAllSales();
+            List<Sale> sales = (List<Sale>) await _saleRepository.Search(null,p=>p.Customer,p=>p.Items);
             var dto = sales.ToListDto();
             return Result<List<SaleDto>>.Succes(dto);
         }

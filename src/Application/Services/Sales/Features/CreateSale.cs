@@ -28,6 +28,11 @@ namespace Application.Services.Sales.Features
                 return Result<SaleDto>.Failure(errors);
             }
 
+            var customer = await _repository.Customers.Get(c=> c.Id == request.CustomerId);
+
+            if (customer is null)
+                return Result<SaleDto>.Failure($"customer with id {request.CustomerId} does not exist");
+
             var details = new List<SaleDetail>();
 
             foreach (var detail in request.Details) 
@@ -65,7 +70,7 @@ namespace Application.Services.Sales.Features
             await _repository.Sales.Create(sale);
             await _repository.SaveChangesAsync();
 
-            var dto = sale.ToDto();
+            var dto = sale.ToDto(customer);
 
             return Result<SaleDto>.Succes(dto);
         }

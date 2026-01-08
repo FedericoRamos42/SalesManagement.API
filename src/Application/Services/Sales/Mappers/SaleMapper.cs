@@ -16,11 +16,24 @@ namespace Application.Services.Sales.Mappers
             return new SaleDto
             {
                 Id = sale.Id,
-                CustomerId = sale.CustomerId,
+                CustomerName = sale.Customer?.Name!,
                 PaymenthMethod = sale.PaymenthMethod.ToString(),
                 Items = sale.Items.Select(x => x.ToDto()).ToList(),
                 TotalAmount = sale.TotalAmount,
             };
+
+        }
+        public static SaleDto ToDto(this Sale sale,Customer customer)
+        {
+            return new SaleDto
+            {
+                Id = sale.Id,
+                CustomerName = customer.Name,
+                PaymenthMethod = sale.PaymenthMethod.ToString(),
+                Items = sale.Items.Select(x => x.ToDto()).ToList(),
+                TotalAmount = sale.TotalAmount,
+            };
+
         }
 
         public static List<SaleDto> ToListDto(this List<Sale> sales) => sales.Select(ToDto).ToList();
