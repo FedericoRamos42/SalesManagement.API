@@ -30,6 +30,13 @@ namespace Application.Services.Producto.Features
                 var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
                 return Result<ProductDto>.Failure(errors);
             }
+            var category = await _repository.Categories.Get(c=>c.Id == request.CategoryId);
+
+            if(category is null)
+            {
+                return Result<ProductDto>.Failure($"category with id {request.CategoryId} does not exist");
+            }
+
             var price = new ProductPrice()
             {
                 UnitPrice = request.Price,

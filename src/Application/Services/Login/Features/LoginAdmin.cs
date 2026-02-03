@@ -1,4 +1,5 @@
-﻿using Application.Services.Login.Interfaces;
+﻿using Application.Result;
+using Application.Services.Login.Interfaces;
 using Application.Services.Login.Models;
 using Domain.Enitites;
 using Domain.Interfaces;
@@ -20,18 +21,18 @@ namespace Application.Services.Login.Features
            _authService = authService;
         }
 
-        public async Task<string?> Execute(LoginRequest request)
+        public async Task<Result<string>> Execute(LoginRequest request)
         {
             var admin = await _repository.Get(x => x.Email == request.Email);
 
             if (admin is null)
-                return "failled email";
+                return Result<string>.Failure("invalid email");
 
             if (!_hasher.Verify(request.Password,admin.Password))
-                return "failled pasword";
+                return Result<string>.Failure("invalid password");
 
-            string token = _authService.CreateToken(request);
-            return token;
+            string token = _authService.CreateToken(admin);
+            return Result<string>.Succes(token);
         }
     }
 }

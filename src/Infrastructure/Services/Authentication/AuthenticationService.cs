@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Application.Services.Login.Interfaces;
+using Domain.Enitites;
 
 namespace Infrastructure.Services.Authentication
 {
@@ -19,11 +20,13 @@ namespace Infrastructure.Services.Authentication
             _configuration = configuration;
         }
         
-        public string CreateToken(LoginRequest userLogin) // pasar el admin;
+        public string CreateToken(Admin user) 
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email,userLogin.Email) //agregar otro claims nombre identificador con el id.
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.Role,"Admin")
 
             };
 

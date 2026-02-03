@@ -1,4 +1,5 @@
 ﻿using Application.Services.Login.Models;
+using Domain.Enitites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.Services.Login.Interfaces
 {
     public interface IAuthService
     {
-        string CreateToken(LoginRequest loginUser);
+        string CreateToken(Admin user);
     }
 }

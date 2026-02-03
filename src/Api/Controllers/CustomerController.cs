@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
