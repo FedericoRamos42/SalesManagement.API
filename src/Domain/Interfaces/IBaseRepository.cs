@@ -14,6 +14,7 @@ namespace Domain.Interfaces
         Task Update(T entity);
         Task Delete(T entity);
         Task<IEnumerable<T>> Search(Expression<Func<T,bool>>? filter = null, params Expression<Func<T, object>>[] includes);
+       
 
     }
 }

@@ -16,10 +16,11 @@ namespace Application.Services.Sales.Mappers
             return new SaleDto
             {
                 Id = sale.Id,
+                Date = sale.CreatedAt.ToString("dd/MM/yy"),
                 CustomerName = sale.Customer?.Name!,
                 PaymenthMethod = sale.PaymenthMethod.ToString(),
-                Items = sale.Items.Select(x => x.ToDto()).ToList(),
                 TotalAmount = sale.TotalAmount,
+                Items = sale.Items.Select(x => x.ToDto()).ToList(),
             };
 
         }
@@ -28,10 +29,11 @@ namespace Application.Services.Sales.Mappers
             return new SaleDto
             {
                 Id = sale.Id,
+                Date = sale.CreatedAt.ToString("dd/MM/yy"),
                 CustomerName = customer.Name,
                 PaymenthMethod = sale.PaymenthMethod.ToString(),
-                Items = sale.Items.Select(x => x.ToDto()).ToList(),
                 TotalAmount = sale.TotalAmount,
+                Items = sale.Items.Select(x => x.ToDto()).ToList(),
             };
 
         }

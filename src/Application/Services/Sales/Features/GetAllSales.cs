@@ -7,6 +7,7 @@ using Application.Result;
 using Application.Services.Sales.Mappers;
 using Application.Services.Sales.Models;
 using Domain.Enitites;
+
 using Domain.Interfaces;
 
 namespace Application.Services.Sales.Features
@@ -22,7 +23,8 @@ namespace Application.Services.Sales.Features
 
         public async Task<Result<List<SaleDto>>> Execute()
         {
-            List<Sale> sales = (List<Sale>) await _saleRepository.Search(null,p=>p.Customer,p=>p.Items);
+            var sales = await _saleRepository.GetAllSales();
+
             var dto = sales.ToListDto();
             return Result<List<SaleDto>>.Succes(dto);
         }

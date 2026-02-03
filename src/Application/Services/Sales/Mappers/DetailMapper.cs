@@ -15,8 +15,10 @@ namespace Application.Services.Sales.Mappers
         {
             return new SaleDetailDto
             {
+                Id = detail.Id,
                 Quantity = detail.Quantity,
-                Product  = detail.Product.Name,
+                ProductName = detail.Product.Name,
+                UnitPrice = detail.UnitPrice,
                 Total = detail.Total,
             };
         }
