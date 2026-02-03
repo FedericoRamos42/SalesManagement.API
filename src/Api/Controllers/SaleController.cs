@@ -20,18 +20,34 @@ namespace Api.Controllers
             _services = services;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            var result = await _services.GetSale.Execute(id);
+            if (!result.IsSucces)
+                return NotFound(new {errors = result.Errors});
+            
+            return Ok(result.Value);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _services.GetAllSale.Execute();
-            return Ok(result);
+            return Ok(result.Value);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSaleRequest request)
         {
             var result = await _services.CreateSale.Execute(request);
-            return Ok(result);
+            if (!result.IsSucces) 
+                return BadRequest(new { errors = result.Errors });
+            return CreatedAtAction(
+                nameof(Get), 
+                new { id = result.Value!.Id }, 
+                result.Value 
+            );
         }
 
         

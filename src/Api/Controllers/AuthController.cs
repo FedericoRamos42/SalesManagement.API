@@ -22,7 +22,11 @@ namespace Api.Controllers
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var result =  await _services.LoginAdmin.Execute(request);
-            return Ok(result);
+
+            if(!result.IsSucces)
+                return Unauthorized(new {errors = result.Errors});
+
+            return Ok(new {token = result.Value});
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Application.Services.Sales
 {
     public record SaleUseCases(
         CreateSale CreateSale,
-        GetAllSales GetAllSale
+        GetAllSales GetAllSale,
+        GetSale GetSale
        );
 }

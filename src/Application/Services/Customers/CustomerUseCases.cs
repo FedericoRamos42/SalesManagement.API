@@ -12,6 +12,7 @@ namespace Application.Services.Customers
         UpdateCustomer UpdateCustomer,
         GetAllCustomer GetAll,
         SearchCustomer Search,
+        GetCustomer Get,
         DeleteCustomer DeleteCustomer
         );
 }

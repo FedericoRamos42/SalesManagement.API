@@ -30,6 +30,7 @@ SaleContainerDi.Register(builder.Services);
 AuthContainerDi.Register(builder.Services);
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<AdminSeeder>();
+builder.Services.AddScoped<CategorySeeder>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSwaggerGen();
 

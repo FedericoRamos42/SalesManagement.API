@@ -20,41 +20,53 @@ namespace Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var result = await _productService.GetProduct.Execute(id);
-            return Ok(result);
+
+            if(!result.IsSucces)
+                return NotFound(new { errors = result.Errors });
+
+            return Ok(result.Value);
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _productService.GetAllProduct.Execute();
-            return Ok(result);
+            return Ok(result.Value);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateProductRequest request)
         {
             var result = await _productService.CreateProduct.Execute(request);
-            return Ok(result);
+            if (!result.IsSucces) 
+                return BadRequest(new {errors =  result.Errors});
+            return CreatedAtAction(nameof(Get), new { id = result.Value!.Id }, result.Value);
         }
 
         [HttpPut ("{id}/stock")]
         public async Task<IActionResult> UpdateStock(int id, [FromBody] UpdateStockRequest request)
         {
             var result = await _productService.UpdateProductStock.Execute(id, request);
-            return Ok(result);
+            if(!result.IsSucces)
+                return BadRequest(new { errors = result.Errors });
+            return Ok(result.Value);
         }
 
         [HttpPut ("{id}/price")]
-        public async Task<IActionResult> UpdateStock(int id, [FromBody] UpdatePriceRequest request)
+        public async Task<IActionResult> UpdatePrice(int id, [FromBody] UpdatePriceRequest request)
         {
             var result = await _productService.UpdateProductPrice.Execute(id, request);
-            return Ok(result);
+            if(!result.IsSucces)
+                return BadRequest(new {errors = result.Errors});
+            return Ok(result.Value);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _productService.DeleteProduct.Execute(id);
-            return Ok(result);
+            if(!result.IsSucces)
+                return BadRequest(result.Errors);
+            return NoContent();
         }
         
     }

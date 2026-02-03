@@ -22,15 +22,10 @@ namespace Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _categoryService.GetAll.Execute();
-            return Ok(result);
+            return Ok(result.Value);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCategoryForRequest request)
-        {
-            var result = await _categoryService.CreateCategory.Execute(request);
-            return Ok(result);
-        }
+        
 
 
 

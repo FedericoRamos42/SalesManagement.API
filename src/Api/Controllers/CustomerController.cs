@@ -19,39 +19,58 @@ namespace Api.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _customerService.Get.Execute(id);
+            if(!result.IsSucces)
+                return  NotFound(new { errors = result.Errors });
+            return Ok(result.Value);
+        }
+
+        [HttpGet("name/{name}")]
         public async Task<IActionResult> Search(string name)
         {
             var result = await _customerService.Search.Execute(name);
-            return Ok(result);
+
+            if(!result.IsSucces)
+                return BadRequest(new { errors = result.Errors });
+
+            return Ok(result.Value);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _customerService.GetAll.Execute();
-            return Ok(result);
+            return Ok(result.Value);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CustomerForRequest request)
         {
             var result = await _customerService.CreateCustomer.Execute(request);
-            return Ok(result);
+            if (!result.IsSucces) 
+                return BadRequest(new {errors =  result.Errors});
+            return CreatedAtAction(nameof(Get), new {id = result.Value!.Id}, result.Value);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id,[FromBody] CustomerForRequest request)
         {
             var result = await _customerService.UpdateCustomer.Execute(id,request);
-            return Ok(result);
+            if (!result.IsSucces)
+                return BadRequest(new { errors = result.Errors });
+            return Ok(result.Value);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _customerService.DeleteCustomer.Execute(id);
-            return Ok(result);
+            if (!result.IsSucces) 
+                return NotFound(new {errors = result.Errors});
+            return NoContent();
         }
 
     }

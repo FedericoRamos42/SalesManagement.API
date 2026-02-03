@@ -2,6 +2,7 @@
 using Application.Services.Categories.Features;
 using Application.Services.Customers;
 using Application.Services.Customers.Features;
+using Application.Services.Sales;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
 
@@ -15,6 +16,7 @@ namespace Api.Dependencies
             services.AddScoped<UpdateCustomer>();
             services.AddScoped<DeleteCustomer>();
             services.AddScoped<SearchCustomer>();
+            services.AddScoped<GetCustomer>();
             services.AddScoped<GetAllCustomer>();
             services.AddScoped<CustomerUseCases>();
             services.AddScoped<ICustomerRepository,CustomerRepository>();
