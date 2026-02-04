@@ -18,7 +18,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+#region services
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,11 +28,13 @@ CategoryContainerDI.Register(builder.Services);
 CustomerContainerDI.Register(builder.Services);
 SaleContainerDi.Register(builder.Services);
 AuthContainerDi.Register(builder.Services);
+DashboardContainerDI.Register(builder.Services);
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<AdminSeeder>();
 builder.Services.AddScoped<CategorySeeder>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSwaggerGen();
+#endregion
 
 #region ValidateAuth
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

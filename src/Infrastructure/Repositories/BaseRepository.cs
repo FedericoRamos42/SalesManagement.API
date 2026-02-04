@@ -17,6 +17,13 @@ namespace Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public Task<int> Count()
+        {
+            var count =  _context.Set<T>().CountAsync(); 
+            return count;
+        }
+
         public async Task Create(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

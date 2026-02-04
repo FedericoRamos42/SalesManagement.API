@@ -15,18 +15,21 @@ namespace Infrastructure.Repositories
         public ICategoryRepository Categories { get; }
         public ICustomerRepository Customers { get; }
         public ISaleRepository Sales { get; }
+        public IDashboardRepository Dashboard { get; }
         public UnitOfWork(
             ApplicationDbContext context,
             ISaleRepository sales,
             IProductRepository products,
             ICustomerRepository customers,
-            ICategoryRepository categories)
+            ICategoryRepository categories,
+            IDashboardRepository dashboard)
         {
             Sales = sales;
             Categories = categories;
             Products = products;
             Customers = customers;
             _context = context;
+            Dashboard = dashboard;
         }
         public Task SaveChangesAsync()
         {

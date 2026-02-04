@@ -13,6 +13,7 @@ namespace Domain.Interfaces
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
+        Task<int>Count(); 
         Task<IEnumerable<T>> Search(Expression<Func<T,bool>>? filter = null, params Expression<Func<T, object>>[] includes);
        
 
