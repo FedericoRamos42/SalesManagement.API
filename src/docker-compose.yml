@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: api-sm
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
+      - Admin__Email=${ADMIN_EMAIL}
+      - Admin__Password=${ADMIN_PASSWORD}
+      - AppSettings__Token=${APP_TOKEN}
+
+    volumes:
+      - sqlite_data:/data
+
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:

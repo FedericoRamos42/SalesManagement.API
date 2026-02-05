@@ -93,7 +93,7 @@ builder.Services.AddSwaggerGen(options =>
 
 #region SqlLite connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DbConnectionStrings")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 #endregion
 
 #region CORS
@@ -118,18 +118,21 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await db.Database.MigrateAsync();
+
     var adminSeeder = scope.ServiceProvider.GetRequiredService<AdminSeeder>();
     await adminSeeder.SeedAsync();
+
     var categorySeeder = scope.ServiceProvider.GetRequiredService<CategorySeeder>();
     await categorySeeder.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -139,4 +142,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Run($"http://0.0.0.0:{port}");
+
