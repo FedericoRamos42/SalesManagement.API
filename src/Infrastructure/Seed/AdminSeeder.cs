@@ -1,6 +1,7 @@
 ﻿using Application.Services.Login.Interfaces;
 using Domain.Enitites;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,19 @@ namespace Infrastructure.Seed
 {
     public class AdminSeeder
     {
-        private readonly ApplicationDbContext _context;
+        
         private readonly IPasswordHasher _hasher;
         private readonly IConfiguration _configuration;
 
-        public AdminSeeder(ApplicationDbContext context, IPasswordHasher hasher, IConfiguration configuration)
+        public AdminSeeder( IPasswordHasher hasher, IConfiguration configuration)
         {
-            _context = context;
             _hasher = hasher;
             _configuration = configuration;
         }
 
-        public async Task SeedAsync()
+        public async Task SeedAsync(ApplicationDbContext context)
         {
-            if (_context.Admins.Any())
+            if (await context.Admins.AnyAsync())
                 return;
 
             var email = _configuration["Admin:Email"];
@@ -41,8 +41,8 @@ namespace Infrastructure.Seed
                 Email = email,
                 Password = passwordHash,
             };
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
+            context.Admins.Add(admin);
+            await context.SaveChangesAsync();
 
 
 

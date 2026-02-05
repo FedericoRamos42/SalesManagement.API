@@ -1,5 +1,6 @@
 ﻿using Domain.Enitites;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,10 @@ namespace Infrastructure.Seed
 {
     public class CategorySeeder
     {
-        private readonly ApplicationDbContext _context;
-        public CategorySeeder(ApplicationDbContext context)
+        
+        public async Task SeedAsync(ApplicationDbContext context)
         {
-            _context = context;
-        }
-        public async Task SeedAsync()
-        {
-            if (_context.Categories.Any())
+            if (await context.Categories.AnyAsync())
                 return;
 
             var categories = new List<Category>
@@ -32,8 +29,8 @@ namespace Infrastructure.Seed
                 new Category { Name = "Otros" }
             };
 
-            _context.Categories.AddRange(categories);
-            await _context.SaveChangesAsync();
+            context.Categories.AddRange(categories);
+            await context.SaveChangesAsync();
         }
     }
 }
