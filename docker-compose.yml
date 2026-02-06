@@ -2,26 +2,37 @@ version: "3.9"
 
 services:
   api:
-    container_name: api-sm
-
+    container_name: sales-management-api
+    
     build:
       context: .
       dockerfile: Dockerfile
-
+      args:
+        BUILD_CONFIGURATION: Release
+    
     ports:
       - "8080:8080"
-
+      - "8081:8081"
+    
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
-      - Admin__Email=${ADMIN_EMAIL}
-      - Admin__Password=${ADMIN_PASSWORD}
-      - AppSettings__Token=${APP_TOKEN}
-
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      
+     
+      - ConnectionStrings__DefaultConnection=Data Source=/data/salesmanagement.db
+      - Admin__Email=${ADMIN_EMAIL:-admin@local.com}
+      - Admin__Password=${ADMIN_PASSWORD:-Admin123!}
+      - AppSettings__Token=${APP_TOKEN:-your-secret-key-must-be-at-least-32-characters-long-1234567890}
+    
     volumes:
       - sqlite_data:/data
-
+    
     restart: unless-stopped
+    
+   
 
 volumes:
   sqlite_data:
+    driver: local
+

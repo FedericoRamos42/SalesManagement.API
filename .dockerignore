@@ -1,0 +1,49 @@
+# Archivos de compilación
+**/bin/
+**/obj/
+**/out/
+
+# Archivos de IDE
+**/.vs/
+**/.vscode/
+**/.idea/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Archivos de sistema
+**/.DS_Store
+**/Thumbs.db
+
+# Archivos de configuración local
+**/*.local
+**/.env
+**/appsettings.Development.json
+
+# Node modules (si tienes frontend)
+**/node_modules/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+**/Dockerfile*
+**/docker-compose*
+**/.dockerignore
+
+# Tests
+**/TestResults/
+**/*.trx
+**/Api.Test/
+
+# Database files
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Logs
+**/logs/
+**/*.log

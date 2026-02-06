@@ -11,10 +11,14 @@ namespace Infrastructure.Seed
 {
     public class CategorySeeder
     {
-        
-        public async Task SeedAsync(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public CategorySeeder(ApplicationDbContext context)
         {
-            if (await context.Categories.AnyAsync())
+            _context = context;
+        }
+        public async Task SeedAsync()
+        {
+            if (await _context.Categories.AnyAsync())
                 return;
 
             var categories = new List<Category>
@@ -29,8 +33,8 @@ namespace Infrastructure.Seed
                 new Category { Name = "Otros" }
             };
 
-            context.Categories.AddRange(categories);
-            await context.SaveChangesAsync();
+            _context.Categories.AddRange(categories);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -16,16 +16,18 @@ namespace Infrastructure.Seed
         
         private readonly IPasswordHasher _hasher;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
 
-        public AdminSeeder( IPasswordHasher hasher, IConfiguration configuration)
+        public AdminSeeder( IPasswordHasher hasher, IConfiguration configuration, ApplicationDbContext context)
         {
             _hasher = hasher;
             _configuration = configuration;
+            _context = context;
         }
 
-        public async Task SeedAsync(ApplicationDbContext context)
+        public async Task SeedAsync()
         {
-            if (await context.Admins.AnyAsync())
+            if (await _context.Admins.AnyAsync())
                 return;
 
             var email = _configuration["Admin:Email"];
@@ -41,8 +43,8 @@ namespace Infrastructure.Seed
                 Email = email,
                 Password = passwordHash,
             };
-            context.Admins.Add(admin);
-            await context.SaveChangesAsync();
+            _context.Admins.Add(admin);
+            await _context.SaveChangesAsync();
 
 
 

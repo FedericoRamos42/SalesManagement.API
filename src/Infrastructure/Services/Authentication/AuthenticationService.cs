@@ -30,9 +30,15 @@ namespace Infrastructure.Services.Authentication
 
             };
 
+            var tokenKey = _configuration["AppSettings:Token"];
+
+            if(string.IsNullOrWhiteSpace(tokenKey))
+                throw new Exception("Token is not configured.");
+
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_configuration["AppSettings:Token"]!)
+                Encoding.UTF8.GetBytes(tokenKey)
                 );
+
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

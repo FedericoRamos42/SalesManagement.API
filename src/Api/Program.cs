@@ -122,10 +122,10 @@ using (var scope = app.Services.CreateScope())
     await db.Database.MigrateAsync();
 
     var adminSeeder = scope.ServiceProvider.GetRequiredService<AdminSeeder>();
-    await adminSeeder.SeedAsync(db);
+    await adminSeeder.SeedAsync();
 
     var categorySeeder = scope.ServiceProvider.GetRequiredService<CategorySeeder>();
-    await categorySeeder.SeedAsync(db);
+    await categorySeeder.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.
